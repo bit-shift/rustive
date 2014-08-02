@@ -19,8 +19,12 @@ impl<'a, T> Behaviour<'a, T> {
 }
 
 fn main() {
-	let time_function = |time: Tm| -> int { return 4; };
-	let mut behaviour : Box<Behaviour<int>> = box Behaviour { f: time_function };
-	println!("{}", behaviour.pull(time::now()));
+	let mut behaviour : Box<Behaviour<int>> = box Behaviour { 
+		f: |time: Tm| -> int { return time.tm_sec as int; } 
+	};
+	loop {
+		println!("{}", behaviour.pull(time::now()));	
+	}
+	
 }
 
